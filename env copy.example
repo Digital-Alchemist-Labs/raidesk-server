@@ -1,0 +1,77 @@
+# RAiDesk Server Configuration
+# Copy this file to .env and update with your values
+
+# ============================================
+# Server Configuration
+# ============================================
+HOST=0.0.0.0
+PORT=8000
+DEBUG=true
+
+# ============================================
+# Ollama Configuration
+# ============================================
+OLLAMA_BASE_URL=http://localhost:11434
+OLLAMA_MODEL=gpt-oss:20b
+
+# ============================================
+# CORS Configuration
+# ============================================
+# Comma-separated list of allowed origins
+# Development:
+CORS_ORIGINS=http://localhost:3000,http://localhost:3001
+
+# Production example:
+# CORS_ORIGINS=https://app.yourcompany.com,https://www.yourcompany.com
+
+# ============================================
+# Storage Configuration
+# ============================================
+# Storage backend: "sqlite" or "redis"
+STORAGE_TYPE=sqlite
+
+# SQLite Configuration (if STORAGE_TYPE=sqlite)
+DATABASE_PATH=./raidesk.db
+
+# Redis Configuration (if STORAGE_TYPE=redis)
+REDIS_URL=redis://localhost:6379
+
+# Alternative Redis with authentication:
+# REDIS_URL=redis://:password@localhost:6379/0
+
+# ============================================
+# Session & Plan Configuration
+# ============================================
+# Session TTL in seconds (24 hours = 86400)
+SESSION_TTL=86400
+
+# Plan TTL in seconds (7 days = 604800, 0 = never expire)
+PLAN_TTL=604800
+
+# ============================================
+# Rate Limiting Configuration
+# ============================================
+RATE_LIMIT_ENABLED=true
+RATE_LIMIT_PER_MINUTE=60
+
+# ============================================
+# LangSmith Configuration (Optional)
+# ============================================
+# Enable tracing with LangSmith for debugging
+LANGCHAIN_TRACING_V2=false
+LANGCHAIN_API_KEY=
+LANGCHAIN_PROJECT=raidesk
+
+# ============================================
+# Production Notes
+# ============================================
+# 
+# For production deployment:
+# 1. Set DEBUG=false
+# 2. Use Redis for better performance (STORAGE_TYPE=redis)
+# 3. Configure production CORS_ORIGINS
+# 4. Adjust rate limits based on your needs
+# 5. Enable monitoring and logging
+# 6. Consider adding authentication (see docs)
+# 7. Use environment-specific secrets management
+# 

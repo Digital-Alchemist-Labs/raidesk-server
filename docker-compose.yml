@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  raidesk-backend:
+    build: .
+    container_name: raidesk-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - HOST=0.0.0.0
+      - PORT=8000
+      - DEBUG=True
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - OLLAMA_MODEL=gpt-oss
+      - CORS_ORIGINS=http://localhost:3000,http://localhost:3001
+    depends_on:
+      - ollama
+    volumes:
+      - ./app:/app/app
+    restart: unless-stopped
+    networks:
+      - raidesk-network
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+    restart: unless-stopped
+    networks:
+      - raidesk-network
+
+volumes:
+  ollama-data:
+
+networks:
+  raidesk-network:
+    driver: bridge
+
